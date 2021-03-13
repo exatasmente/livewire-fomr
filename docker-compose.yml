@@ -1,0 +1,77 @@
+version: '3.3'
+networks:
+  backend:
+  frontend:
+services:
+#  console:
+#    image: bref/php-74
+#    volumes:
+#      - .:/var/task:ro
+#    entrypoint: php artisan
+#    networks:
+#      - backend
+#  web:
+#    image: bref/fpm-dev-gateway
+#    ports:
+#      - '8000:80'
+#    volumes:
+#      - .:/var/task
+#    links:
+#      - php-bref
+#    environment:
+#      HANDLER: public/index.php
+#      DOCUMENT_ROOT: public
+#  php-bref:
+#      image: bref/php-74-fpm-dev
+#      volumes:
+#        - .:/var/task:ro
+#      networks:
+#        - backend
+  mysql:
+    image: mysql:5.7
+    container_name: plural-challenge-database
+    ports:
+      - '3306:3306'
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=plural_challenge
+  site:
+    image: nginx:stable-alpine
+    container_name: plural-challenge-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx.develop.conf:/etc/nginx/conf.d/default.conf
+
+    networks:
+      - backend
+      - frontend
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: plural-challenge-php
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - backend
+  redis:
+    image: redis:4.0
+    container_name: plural-challenge-redis
+    networks:
+      - backend
+    ports:
+      - 6379:6379
+
+  npm:
+    image: node:13.7
+    container_name: plural-challenge-npm
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
