@@ -66,7 +66,7 @@ class SaveUserValidator extends AbstractSaveUserValidator
             'address.line_1' => ['required','string'],
             'address.line_2' => ['sometimes','string'],
             'address.neighborhood' => ['required','string'],
-            'address.number' => ['nullable','string'],
+            'address.number' => ['nullable','string','max:10'],
             'address.state' => ['required', 'string'],
             'address.city' => ['required', 'string'],
             'address.zipcode' => ['required','digits:8'],

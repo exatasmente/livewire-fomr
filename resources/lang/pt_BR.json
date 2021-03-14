@@ -23,5 +23,12 @@
   "Created" : "Criado",
   "Updated" : "Atualizado",
   "Search" : "Pesquisa",
-  "Users" : "Usuarios"
+  "Users" : "Usuarios",
+  ":app_name - New User created" : ":app_name - Novo usuário criado",
+  ":app_name - Email address updated" : ":app_name - endereço de e-mail atualizado ",
+  "Your email address has been updated" : "Seu endereço de e-mail foi atualizado",
+  "The email address of your account in :app_name has been updated" : "O endereço de e-mail da sua conta em :app_name foi atualizado",
+  "Your email address has been used to create a new account in :app_name" : "Seu endereço de e-mail foi usado para criar uma nova conta em :app_name",
+  "Automated message. Please do not reply." : "Mensagem automatica. Por favor, não responda.",
+  "New user account was created" : "Nova conta de usuário foi criada"
 }

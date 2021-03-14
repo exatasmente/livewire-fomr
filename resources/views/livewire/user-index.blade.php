@@ -30,5 +30,8 @@
         @endforeach
     </ul>
     </div>
+    <div class="mt-2">
+        {{$this->users->links()}}
+    </div>
 </div>
 

@@ -2,7 +2,7 @@
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="relative py-5 flex flex-wrap items-center justify-center lg:justify-between">
             <div class="absolute left-0 flex-shrink-0 lg:static">
-                <a href="#">
+                <a href="{{route('home')}}">
                     <x-layout.app-logo class="text-purple-200"></x-layout.app-logo>
                 </a>
             </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="mt-3 px-2 space-y-1">
-                        <a href="#" class="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">Home</a>
+                        <a href="{{route('home')}}" class="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800">{{ __('Home') }}</a>
                     </div>
                 </div>
             </div>
