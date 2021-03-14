@@ -48,7 +48,9 @@
             <div class="w-full md:w-10/12">
                 <x-form.field wire:model.lazy="address.line_2" name="address.line_2" type="text" label="{{__('Address Line 2')}}" placeholder="{{__('Your Address line 2')}}" hasError="{{$this->getErrorBag()->has('address.line_2')}}" ></x-form.field>
             </div>
+            <div class="w-full md:w-2/12">
             <x-form.field wire:model.lazy="address.number" name="address.number" type="text" label="{{__('Number')}}" placeholder="N/A" hasError="{{$this->getErrorBag()->has('address.number')}}" ></x-form.field>
+            </div>
         </div>
 
         @if (!$this->isEdit())

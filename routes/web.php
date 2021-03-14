@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[\App\Http\Controllers\UserController::class,'index']);
-Route::get('/users', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
-Route::get('/users/{id}',[\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+Route::get('/',[HomeController::class,'index'])->name('home');
+
+Route::name('user.')->prefix('users')->group(function(){
+    Route::get('/', [UserController::class, 'create'])->name('create');
+    Route::get('/{id}',[UserController::class, 'edit'])->name('edit');
+});

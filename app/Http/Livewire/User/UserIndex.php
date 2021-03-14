@@ -4,9 +4,11 @@ namespace App\Http\Livewire\User;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserIndex extends Component
 {
+    use WithPagination;
 
     protected $listeners = [
         'new-user-created' => '$refresh'
@@ -20,7 +22,7 @@ class UserIndex extends Component
 
     public function getUsersProperty()
     {
-        return User::query()->paginate();
+        return User::query()->simplePaginate(5);
     }
 
     public function render()

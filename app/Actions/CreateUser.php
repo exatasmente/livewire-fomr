@@ -3,14 +3,13 @@
 
 namespace App\Actions;
 
-
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class CreateUser
 {
 
-    private $createAddress;
+    private CreateOrUpdateAddress $createAddress;
 
     public function __construct(CreateOrUpdateAddress $createAddress)
     {
