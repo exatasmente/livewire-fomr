@@ -150,7 +150,7 @@ class UserForm extends FormComponent
     {
         $data = app(AddressFinder::class)->findAddress($zipcode);
 
-        if ($data) {
+        if (!$data) {
             $this->addError('address.zipcode',trans('validation.zipcode-not-exists'));
             $this->dispatchBrowserEvent('open-notification',['type' => 'error', 'message' =>  trans('notifications.zipcode-not-exists')]);
         }
