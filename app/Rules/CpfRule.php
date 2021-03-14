@@ -46,6 +46,6 @@ class CpfRule implements Rule
      */
     public function message()
     {
-        return trans('validation.cpf');
+        return trans('validation.document');
     }
 }
