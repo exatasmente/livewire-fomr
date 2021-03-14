@@ -15,7 +15,7 @@ class UserIndex extends Component
 
     public function editUser($userId)
     {
-        $this->emitUp('edit-user',$userId);
+        $this->redirect(route('users.edit',['id' => $userId]));
     }
 
     public function getUsersProperty()

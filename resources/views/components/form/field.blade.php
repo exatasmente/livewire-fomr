@@ -9,7 +9,7 @@
         @if(isset($input))
             {{$input}}
         @else
-            <x-form.input {{$attributes}} class="block w-full sm:text-sm rounded-md ring ring-purple-500" ></x-form.input>
+            <x-form.input  {{$attributes}} class="block w-full sm:text-sm rounded-md ring ring-purple-500" ></x-form.input>
             @error($attributes->get('name'))
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

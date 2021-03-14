@@ -9,6 +9,7 @@ use App\Http\Livewire\FormComponent;
 use App\Models\Address;
 use App\Models\User;
 use App\Validators\Livewire\SaveUserValidator;
+use GuzzleHttp\Client;
 
 class UserForm extends FormComponent
 {
@@ -61,6 +62,16 @@ class UserForm extends FormComponent
         return resolve(SaveUserValidator::class)->setUserId($this->userId)->rules();
     }
 
+    public function updatedAddressZipcode($value)
+    {
+        try {
+            $this->validateOnly('address.zipcode');
+
+            $this->searchAddress($value);
+        } catch (\Exception $e) {
+
+        }
+    }
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -132,5 +143,26 @@ class UserForm extends FormComponent
         return $this->isEdit() ? User::query()->find($this->userId) : null;
     }
 
+    private function searchAddress($zipcode)
+    {
+        $client = new Client([
+            'base_uri' => config('services.postmon.api_url'),
+            'http_errors' => false,
+        ]);
+
+        $response = $client->get($zipcode);
+
+        if ($response->getStatusCode() == 200) {
+            $data = json_decode($response->getBody()->getContents());
+
+            $this->fill([
+                'address.line_1' => data_get($data,'logradouro',""),
+                'address.line_2' => data_get($data,'complemento',""),
+                'address.neighborhood' => data_get($data, 'bairro',""),
+                'address.city' => data_get($data, 'cidade',""),
+                'address.state' => data_get($data,'estado_info.nome',""),
+            ]);
+        }
+    }
 
 }

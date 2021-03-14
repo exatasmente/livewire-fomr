@@ -25551,15 +25551,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var inputmask_lib_inputmask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! inputmask/lib/inputmask */ "./node_modules/inputmask/lib/inputmask.js");
 
 
-var inputMask = function inputMask(mask, _ref) {
-  var callback = _ref.callback;
+var inputMask = function inputMask(mask) {
   return {
-    timer: null,
-    value: null,
-    callback: callback,
-    init: function init() {
-      var _this = this;
-
+    init: function init(value) {
       var self = this;
       Object(inputmask_lib_inputmask__WEBPACK_IMPORTED_MODULE_0__["default"])(mask, {
         rightAlign: false,
@@ -25573,12 +25567,6 @@ var inputMask = function inputMask(mask, _ref) {
           return value;
         }
       }).mask(self.$el);
-      self.$el.addEventListener('change', function (e) {
-        _this.timer = setTimeout(function () {
-          var val = self.$el.inputmask.unmaskedvalue();
-          self.callback(val);
-        }, 100);
-      });
     }
   };
 };

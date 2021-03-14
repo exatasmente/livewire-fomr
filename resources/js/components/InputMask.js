@@ -1,11 +1,8 @@
 import Inputmask from "inputmask/lib/inputmask";
 
-const inputMask = function(mask, {callback}) {
+const inputMask = function(mask) {
     return {
-        timer: null,
-        value : null,
-        callback: callback,
-        init() {
+        init(value) {
             const self = this;
             Inputmask(mask,{
                 rightAlign: false,
@@ -19,12 +16,6 @@ const inputMask = function(mask, {callback}) {
                 },
             }).mask(self.$el)
 
-            self.$el.addEventListener('change', (e) => {
-                this.timer = setTimeout(()=>{
-                    const val = self.$el.inputmask.unmaskedvalue()
-                    self.callback(val);
-                },100);
-            })
         },
     }
 }
