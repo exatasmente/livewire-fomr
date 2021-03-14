@@ -1,26 +1,29 @@
 import Inputmask from "inputmask/lib/inputmask";
 
-const inputMask = function(mask, input) {
+const inputMask = function(mask, {callback}) {
     return {
-        input : input,
-        time : null,
+        timer: null,
+        value : null,
+        callback: callback,
         init() {
+            const self = this;
             Inputmask(mask,{
                 rightAlign: false,
                 autoUnmask: true,
-                onBeforeMask: function (value, opts) {
+                clearIncomplete: false,
+                onBeforeMask(value, opts) {
                     if(null === value){
-                        value= ' '
+                        value = ' '
                     }
                     return value;
-                }
-            }).mask(this.$el)
-            const self = this.$el;
-            this.$el.addEventListener('change', function(event) {
-                const inputEvent = new CustomEvent('input', {detail:event.target.value});
+                },
+            }).mask(self.$el)
+
+            self.$el.addEventListener('change', (e) => {
                 this.timer = setTimeout(()=>{
-                    self.dispatchEvent(inputEvent);
-                },200);
+                    const val = self.$el.inputmask.unmaskedvalue()
+                    self.callback(val);
+                },100);
             })
         },
     }

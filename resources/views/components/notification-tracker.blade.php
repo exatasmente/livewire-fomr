@@ -1,5 +1,3 @@
-
-
 <div>
     <div  x-cloak
           wire:ignore

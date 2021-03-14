@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\User;
 
 use App\Models\User;
 use Livewire\Component;
@@ -13,10 +13,14 @@ class UserIndex extends Component
     ];
 
 
-
     public function editUser($userId)
     {
         $this->emitUp('edit-user',$userId);
+    }
+
+    public function getUsersProperty()
+    {
+        return User::query()->paginate();
     }
 
     public function render()

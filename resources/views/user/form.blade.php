@@ -1,6 +1,10 @@
 <x-app>
     <x-slot name="title">Add User</x-slot>
-    <div class="container max-w-7xl mx-auto sm:px-6 py-4 lg:px-8">
-    <livewire:user-form :user="isset($user) ? $user : null"></livewire:user-form>
-    </div>
+    <x-slot name="main">
+            <livewire:user.user-form :user="isset($user) ? $user : null"></livewire:user.user-form>
+    </x-slot>
+    <x-slot name="right">
+        <livewire:user.user-index></livewire:user.user-index>
+    </x-slot>
+
 </x-app>

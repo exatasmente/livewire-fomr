@@ -25551,14 +25551,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var inputmask_lib_inputmask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! inputmask/lib/inputmask */ "./node_modules/inputmask/lib/inputmask.js");
 
 
-var inputMask = function inputMask(mask, input) {
+var inputMask = function inputMask(mask, _ref) {
+  var callback = _ref.callback;
   return {
-    input: input,
-    time: null,
+    timer: null,
+    value: null,
+    callback: callback,
     init: function init() {
+      var _this = this;
+
+      var self = this;
       Object(inputmask_lib_inputmask__WEBPACK_IMPORTED_MODULE_0__["default"])(mask, {
         rightAlign: false,
         autoUnmask: true,
+        clearIncomplete: false,
         onBeforeMask: function onBeforeMask(value, opts) {
           if (null === value) {
             value = ' ';
@@ -25566,15 +25572,12 @@ var inputMask = function inputMask(mask, input) {
 
           return value;
         }
-      }).mask(this.$el);
-      var self = this.$el;
-      this.$el.addEventListener('change', function (event) {
-        var inputEvent = new CustomEvent('input', {
-          detail: event.target.value
-        });
-        this.timer = setTimeout(function () {
-          self.dispatchEvent(inputEvent);
-        }, 200);
+      }).mask(self.$el);
+      self.$el.addEventListener('change', function (e) {
+        _this.timer = setTimeout(function () {
+          var val = self.$el.inputmask.unmaskedvalue();
+          self.callback(val);
+        }, 100);
       });
     }
   };
