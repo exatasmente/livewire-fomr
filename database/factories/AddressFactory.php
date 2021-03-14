@@ -27,6 +27,7 @@ class AddressFactory extends Factory
             'line_2' => $this->faker->secondaryAddress,
             'city' =>  $this->faker->city,
             'state' => $this->faker->state,
+            'neighborhood' => $this->faker->name,
             'number'=> $this->faker->numerify('###'),
             'zipcode' => $this->faker->numerify('########'),
         ];
