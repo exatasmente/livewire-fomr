@@ -48,7 +48,7 @@ class SaveUserValidator extends AbstractSaveUserValidator
         return [
             'user.email' => ['required','email', 'unique:users,email'],
             'user.document' => ['required', new CpfRule(), 'unique:users,document'],
-            'user.password' => ['required','string','min:4','confirmed'],
+            'user.password' => ['required','string','min:4'],
             'user.password_confirmation' => ['required','same:user.password'],
             'user.terms' => ['accepted'],
         ];
