@@ -46,9 +46,9 @@
         </div>
         <div  wire:loading.class="animate-pulse"  wire:target="address.zipcode" class="col-span-8 flex-wrap md:flex-nowrap flex space-x-0 space-y-2 md:space-y-0  md:space-x-2 justify-around">
             <div class="w-full md:w-10/12">
-                <x-form.field wire:model.lazy="address.line_2" name="address.line_2" required type="text" label="{{__('Address Line 2')}}" placeholder="{{__('Your Address line 2')}}" hasError="{{$this->getErrorBag()->has('address.line_2')}}" ></x-form.field>
+                <x-form.field wire:model.lazy="address.line_2" name="address.line_2" type="text" label="{{__('Address Line 2')}}" placeholder="{{__('Your Address line 2')}}" hasError="{{$this->getErrorBag()->has('address.line_2')}}" ></x-form.field>
             </div>
-            <x-form.field wire:model.lazy="address.number" name="address.number" required type="text" label="{{__('Number')}}" placeholder="N/A" hasError="{{$this->getErrorBag()->has('address.number')}}" ></x-form.field>
+            <x-form.field wire:model.lazy="address.number" name="address.number" type="text" label="{{__('Number')}}" placeholder="N/A" hasError="{{$this->getErrorBag()->has('address.number')}}" ></x-form.field>
         </div>
 
         @if (!$this->isEdit())
