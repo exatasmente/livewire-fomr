@@ -6,10 +6,12 @@ use App\Actions\CreateUser;
 use App\Actions\SaveUser;
 use App\Actions\UpdateUser;
 use App\Http\Livewire\FormComponent;
+use App\Libraries\Address\AddressFinder;
 use App\Models\Address;
 use App\Models\User;
 use App\Validators\Livewire\SaveUserValidator;
 use GuzzleHttp\Client;
+use http\Client\Request;
 
 class UserForm extends FormComponent
 {
@@ -17,24 +19,24 @@ class UserForm extends FormComponent
 
     public $userId;
     public $user = [
-        'first_name',
-        'last_name',
-        'email',
-        'document',
-        'phone',
-        'password',
-        'password_confirmation',
-        'terms',
+        'first_name' => '',
+        'last_name' => '',
+        'email' => '',
+        'document' => '',
+        'phone' => '',
+        'password' => '',
+        'password_confirmation' => '',
+        'terms' => '',
     ];
 
     public $address = [
-        'zipcode',
-        'state',
-        'city',
-        'line_1',
-        'line_2',
-        'neighborhood',
-        'number',
+        'zipcode' => '',
+        'state' => '',
+        'city' => '',
+        'line_1' => '',
+        'line_2' => '',
+        'neighborhood' => '',
+        'number' => '',
     ];
 
     protected $listeners = [
@@ -47,7 +49,6 @@ class UserForm extends FormComponent
         $this->validator = SaveUserValidator::class;
 
         if ($user) {
-            $this->userId = $user->id;
             $this->setUserToEdit($user);
         }
 
@@ -86,8 +87,8 @@ class UserForm extends FormComponent
         } else {
             $user = resolve(CreateUser::class)->execute($this->user,$this->address);
         }
-
         if ($user) {
+
             $message = trans('notifications.user-'. ($user->wasRecentlyCreated ? 'created' : 'updated'), ['email' => $user->email, 'id' => $user->id]);
             $this->dispatchBrowserEvent('open-notification', ['type' => 'success', 'message' => $message]);
             $this->emitSelf('success');
@@ -101,6 +102,7 @@ class UserForm extends FormComponent
 
     public function setUserToEdit(User $user)
     {
+        $this->userId = $user->id;
         $attributes = $user->only([
             'first_name',
             'last_name',
@@ -123,6 +125,7 @@ class UserForm extends FormComponent
                 'zipcode',
             ]);
         }
+        $this->resetErrorBag();
     }
 
     public function render()
@@ -145,24 +148,21 @@ class UserForm extends FormComponent
 
     private function searchAddress($zipcode)
     {
-        $client = new Client([
-            'base_uri' => config('services.postmon.api_url'),
-            'http_errors' => false,
+        $data = app(AddressFinder::class)->findAddress($zipcode);
+
+        if ($data) {
+            $this->addError('address.zipcode',trans('validation.zipcode-not-exists'));
+            $this->dispatchBrowserEvent('open-notification',['type' => 'error', 'message' =>  trans('notifications.zipcode-not-exists')]);
+        }
+
+        $this->fill([
+            'address.line_1' => data_get($data,'line_1',""),
+            'address.line_2' => data_get($data,'line_2',""),
+            'address.neighborhood' => data_get($data, 'neighborhood',""),
+            'address.city' => data_get($data, 'city',""),
+            'address.state' => data_get($data,'state',""),
         ]);
 
-        $response = $client->get($zipcode);
-
-        if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody()->getContents());
-
-            $this->fill([
-                'address.line_1' => data_get($data,'logradouro',""),
-                'address.line_2' => data_get($data,'complemento',""),
-                'address.neighborhood' => data_get($data, 'bairro',""),
-                'address.city' => data_get($data, 'cidade',""),
-                'address.state' => data_get($data,'estado_info.nome',""),
-            ]);
-        }
     }
 
 }

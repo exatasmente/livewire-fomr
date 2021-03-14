@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Libraries\Address\AddressFinder;
+use App\Libraries\Address\ViaCep\ViaCepAddressFinder;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton(AddressFinder::class, function(){
+            return new ViaCepAddressFinder(config('services.address'));
+        });
     }
 }

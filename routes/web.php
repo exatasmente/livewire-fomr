@@ -12,6 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/',[\App\Http\Controllers\UserController::class,'index']);
 Route::get('/users', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
 Route::get('/users/{id}',[\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');

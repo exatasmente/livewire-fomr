@@ -24,7 +24,7 @@
     @stack('script')
     <style>
         *{
-            transition : all 0.4s;
+            transition : all 0.2s;
         }
         [x-cloak]{
             display:  none;
@@ -38,7 +38,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <h1 class="sr-only">Page title</h1>
 
-            <div class="grid grid-cols--1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
+            <div class="grid grid-cols--1 gap-4 items-start {{ isset($right) ? 'lg:grid-cols-3' : '' }} lg:gap-8">
 
                 <div class="grid grid-cols-1 gap-4 lg:col-span-2">
                     <section aria-labelledby="section-1-title">
@@ -50,17 +50,18 @@
                         </div>
                     </section>
                 </div>
-
-                    <div class="grid grid-cols-1 gap-4">
-                        <section aria-labelledby="section-2-title">
-                            <h2 class="sr-only" id="section-2-title">Section title</h2>
-                            <div class="rounded-lg bg-white overflow-hidden shadow">
-                                <div class="p-6">
-                                    {{$right}}
-                                </div>
+                @isset($right)
+                <div class="grid grid-cols-1 gap-4">
+                    <section aria-labelledby="section-2-title">
+                        <h2 class="sr-only" id="section-2-title">Section title</h2>
+                        <div class="rounded-lg bg-white overflow-hidden shadow">
+                            <div class="p-6">
+                                {{$right}}
                             </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
+                </div>
+                @endisset
             </div>
         </div>
     </main>

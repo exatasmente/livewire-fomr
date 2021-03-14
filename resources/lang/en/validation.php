@@ -117,7 +117,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-
+    'zipcode-not-exists' => 'Please verify the given zipcode.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
