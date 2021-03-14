@@ -67,9 +67,8 @@ services:
       - backend
     ports:
       - 6379:6379
-
   npm:
-    image: node:13.7
+    image: node:14.0
     container_name: plural-challenge-npm
     volumes:
       - ./:/var/www/html

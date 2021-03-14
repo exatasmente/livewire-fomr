@@ -10,66 +10,66 @@
     </x-slot>
 
     <x-slot name="form">
-        <div class="col-span-8 flex-wrap md:flex-no-wrap flex gap-1 justify-around">
+        <div class="col-span-8 flex-wrap md:flex-nowrap flex space-x-0 space-y-2 md:space-y-0  md:space-x-2 justify-around">
             <div class="w-full md:w-6/12">
-                <x-form.field wire:model.lazy="user.first_name" type="text" name="user.first_name" placeholder="{{__('First Name')}}" label="{{__('First Name')}}" hasError="{{$this->getErrorBag()->has('user.first_name')}}"></x-form.field>
+            <x-form.field wire:model.lazy="user.first_name" type="text" name="user.first_name" required placeholder="{{__('First Name')}}" label="{{__('First Name')}}" hasError="{{$this->getErrorBag()->has('user.first_name')}}"></x-form.field>
             </div>
             <div class="w-full md:w-6/12">
-                <x-form.field wire:model.lazy="user.last_name" type="text" name="user.last_name" placeholder="{{__('Last Name')}}" label="{{__('Last Name')}}" hasError="{{$this->getErrorBag()->has('user.last_name')}}"></x-form.field>
+            <x-form.field wire:model.lazy="user.last_name" type="text" name="user.last_name" required placeholder="{{__('Last Name')}}" label="{{__('Last Name')}}" hasError="{{$this->getErrorBag()->has('user.last_name')}}"></x-form.field>
             </div>
         </div>
         <div class="col-span-8">
-            <x-form.field wire:model.lazy="user.email" name="user.email" type="email" placeholder="email@example.com" label="{{__('Email')}}" hasError="{{$this->getErrorBag()->has('user.email')}}"></x-form.field>
+            <x-form.field wire:model.lazy="user.email" name="user.email" type="email" required placeholder="email@example.com" label="{{__('Email')}}" hasError="{{$this->getErrorBag()->has('user.email')}}" class="w-full"></x-form.field>
         </div>
         <div class="col-span-8">
-            <x-form.field wire:model.lazy="user.document" mask="999.999.999-99" name="user.document" type="text" placeholder="000.000.000-00" label="{{__('CPF')}}" hasError="{{$this->getErrorBag()->has('user.document')}}"></x-form.field>
+            <x-form.field wire:model.lazy="user.document" mask="999.999.999-99" required name="user.document" type="text" placeholder="000.000.000-00" label="{{__('CPF')}}" hasError="{{$this->getErrorBag()->has('user.document')}}"></x-form.field>
         </div>
         <div class="col-span-8">
-            <x-form.field wire:model.lazy="user.phone" mask="(99) 9 9999-9999" name="user.phone" type="text" placeholder="(99) 9 9999-9999" label="{{__('Phone')}}" hasError="{{$this->getErrorBag()->has('user.phone')}}"></x-form.field>
+            <x-form.field wire:model.lazy="user.phone" mask="(99) 9 9999-9999" required name="user.phone" type="text" placeholder="(99) 9 9999-9999" label="{{__('Phone')}}" hasError="{{$this->getErrorBag()->has('user.phone')}}"></x-form.field>
         </div>
         <div  class="col-span-8 space-y-1">
-            <x-form.field wire:model.lazy="address.zipcode" mask="99999-999" name="address.zipcode" placeholder="00000-000" type="text" label="{{__('Zipcode')}}" hasError="{{$this->getErrorBag()->has('address.zipcode')}}"></x-form.field>
+            <x-form.field wire:model.lazy="address.zipcode" mask="99999-999" required name="address.zipcode" placeholder="00000-000" type="text" label="{{__('Zipcode')}}" hasError="{{$this->getErrorBag()->has('address.zipcode')}}"></x-form.field>
         </div>
-        <div class="col-span-8 flex-wrap md:flex-no-wrap flex gap-1 justify-around">
-            <div class="w-full lg:w-5/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.state" name="address.state" type="text" label="{{__('State')}}" placeholder="{{__('State')}}" hasError="{{$this->getErrorBag()->has('address.state')}}"></x-form.field>
+        <div wire:loading.class="animate-pulse"  wire:target="address.zipcode" class="col-span-8 flex-wrap md:flex-nowrap flex space-x-0 space-y-2 md:space-y-0  md:space-x-2 justify-around">
+            <div class="w-full md:w-4/12">
+                <x-form.field wire:model.lazy="address.state" name="address.state" required type="text" label="{{__('State')}}" placeholder="{{__('State')}}" hasError="{{$this->getErrorBag()->has('address.state')}}"></x-form.field>
             </div>
-            <div class="w-full lg:w-5/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.city" name="address.city" type="text" label="{{__('City')}}" placeholder="{{__('City')}}" hasError="{{$this->getErrorBag()->has('address.city')}}"></x-form.field>
+            <div class="w-full md:w-4/12">
+                <x-form.field wire:model.lazy="address.city" name="address.city" required type="text" label="{{__('City')}}" placeholder="{{__('City')}}" hasError="{{$this->getErrorBag()->has('address.city')}}"></x-form.field>
             </div>
-            <div class="w-full lg:w-5/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.neighborhood" name="address.neighborhood" type="text" label="{{__('Neighborhood')}}" placeholder="{{__('Neighborhood')}}" hasError="{{$this->getErrorBag()->has('address.city')}}"></x-form.field>
-            </div>
-        </div>
-        <div class="col-span-8 flex-wrap md:flex-no-wrap flex gap-1 justify-around">
-            <div class="w-full lg:w-5/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.line_1" name="address.line_1" type="text" label="{{__('Address Line 1')}}" placeholder="{{__('Your Address line 1')}}" hasError="{{$this->getErrorBag()->has('address.line_1')}}" ></x-form.field>
-            </div>
-            <div class="w-full lg:w-5/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.line_2" name="address.line_2" type="text" label="{{__('Address Line 2')}}" placeholder="{{__('Your Address line 2')}}" hasError="{{$this->getErrorBag()->has('address.line_2')}}" ></x-form.field>
-            </div>
-            <div class="w-full lg:w-2/12">
-                <x-form.field wire:loading.attr="readonly"  wire:target="address.zipcode" wire:model.lazy="address.number" name="address.number" type="text" label="{{__('Number')}}" placeholder="N/A" hasError="{{$this->getErrorBag()->has('address.number')}}" ></x-form.field>
+            <div class="w-full md:w-4/12">
+                <x-form.field wire:model.lazy="address.neighborhood" name="address.neighborhood" required type="text" label="{{__('Neighborhood')}}" placeholder="{{__('Neighborhood')}}" hasError="{{$this->getErrorBag()->has('address.city')}}"></x-form.field>
             </div>
         </div>
+        <div wire:loading.class="animate-pulse"  wire:target="address.zipcode" class="col-span-8 space-y-1">
+            <x-form.field  wire:model.lazy="address.line_1" name="address.line_1" required type="text" label="{{__('Address Line 1')}}" placeholder="{{__('Your Address line 1')}}" hasError="{{$this->getErrorBag()->has('address.line_1')}}" ></x-form.field>
+        </div>
+        <div  wire:loading.class="animate-pulse"  wire:target="address.zipcode" class="col-span-8 flex-wrap md:flex-nowrap flex space-x-0 space-y-2 md:space-y-0  md:space-x-2 justify-around">
+            <div class="w-full md:w-10/12">
+                <x-form.field wire:model.lazy="address.line_2" name="address.line_2" required type="text" label="{{__('Address Line 2')}}" placeholder="{{__('Your Address line 2')}}" hasError="{{$this->getErrorBag()->has('address.line_2')}}" ></x-form.field>
+            </div>
+            <x-form.field wire:model.lazy="address.number" name="address.number" required type="text" label="{{__('Number')}}" placeholder="N/A" hasError="{{$this->getErrorBag()->has('address.number')}}" ></x-form.field>
+        </div>
+
         @if (!$this->isEdit())
-            <div class="col-span-8 flex-wrap md:flex-no-wrap flex gap-1 justify-around">
+            <div class="col-span-8 flex-wrap md:flex-nowrap flex space-x-0 space-y-2 md:space-y-0  md:space-x-2 justify-around">
                 <div class="w-full md:w-6/12">
-                    <x-form.field wire:model.lazy="user.password" name="user.password" type="password" label="{{__('Password')}}" hasError="{{$this->getErrorBag()->has('user.password')}}"></x-form.field>
+                    <x-form.field wire:model.lazy="user.password" name="user.password" required type="password" label="{{__('Password')}}" hasError="{{$this->getErrorBag()->has('user.password')}}"></x-form.field>
                 </div>
                 <div class="w-full md:w-6/12">
-                    <x-form.field wire:model.lazy="user.password_confirmation" type="password"  name="user.password_confirmation" label="{{__('Confirm Password')}}" hasError="{{$this->getErrorBag()->has('user.password_confirmation')}}"></x-form.field>
+                    <x-form.field wire:model.lazy="user.password_confirmation" type="password" required name="user.password_confirmation" label="{{__('Confirm Password')}}" hasError="{{$this->getErrorBag()->has('user.password_confirmation')}}"></x-form.field>
                 </div>
             </div>
 
         <div class="col-span-8">
             <div class="justify-self-start gap-3 flex flex-wrap">
                 <x-form.field name="user.terms">
-                    <x-slot name="inputLabel">
-                        <x-form.label for="user.terms">{{ __('Accept Terms of Use') }}</x-form.label>
-                    </x-slot>
+                    <x-slot name="inputLabel"></x-slot>
                     <x-slot name="input">
-                        <x-form.input.checkbox hasError="{{$this->getErrorBag()->has('user.terms')}}" wire:model.lazy="user.terms" class="form-checkbox h-8 w-8 text-purple-600"></x-form.input.checkbox>
+                        <div class="flex space-x-2 align-text-top leading-tight ">
+                            <x-form.input.checkbox required hasError="{{$this->getErrorBag()->has('user.terms')}}" wire:model.lazy="user.terms"></x-form.input.checkbox>
+                            <x-form.label for="user.terms" class="text-1xl">{{ __('Accept Terms of Use') }}*</x-form.label>
+                        </div>
                     </x-slot>
                 </x-form.field>
             </div>

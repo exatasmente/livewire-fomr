@@ -29,7 +29,7 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    'postmon' => [
-        'api_url' => env('POSTMON_API_URL'),
+    'address' => [
+        'api_url' => env('VIA_CEP_API_URL'),
     ]
 ];

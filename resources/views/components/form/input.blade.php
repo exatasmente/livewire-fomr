@@ -4,7 +4,7 @@
     $wire = $attributes->whereStartsWith('wire:model');
 
  }
- $attributes = $attributes->class(['focus:outline-none','p-2','focus:border','rounded-md', 'shadow-sm', 'border border-purple-400 focus:border-purple-500' => !$hasError, 'text-red-400 border border-red-500 focus:border-red-500' => $hasError]);
+ $attributes = $attributes->class(['w-full','shadow-sm','block','sm:text-sm', 'rounded-md','p-2','sm:text-sm','focus:ring-purple-500 focus:border-purple-300' => !$hasError, 'text-red-400 border-red-500 focus:border-red-300  focus:ring-red-500' => $hasError]);
 @endphp
 
 @if ($attributes->has('mask'))
