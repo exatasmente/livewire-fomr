@@ -4,6 +4,10 @@
 namespace App\Validators\Contracts;
 
 
+/**
+ * Interface ValidatorInterface
+ * @package App\Validators\Contracts
+ */
 interface ValidatorInterface
 {
     /**
@@ -13,9 +17,9 @@ interface ValidatorInterface
 
     /**
      * @param array $data
-     * @return array
+     * @return mixed
      */
-    public function validate(array $data) : array;
+    public function validate(array $data);
 
 
 }
