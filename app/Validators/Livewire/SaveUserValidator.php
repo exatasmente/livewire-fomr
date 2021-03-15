@@ -5,32 +5,49 @@ namespace App\Validators\Livewire;
 
 
 use App\Rules\CpfRule;
-use App\Validators\AbstractSaveUserValidator;
+use App\Validators\AbstractFormValidator;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 
-class SaveUserValidator extends AbstractSaveUserValidator
+/**
+ * Class SaveUserValidator
+ * @package App\Validators\Livewire
+ */
+class SaveUserValidator extends AbstractFormValidator
 {
+    /**
+     * @var null
+     */
     private $userId;
 
+    /**
+     * SaveUserValidator constructor.
+     * @param null $userId
+     */
     public function __construct($userId = null)
     {
         $this->userId = $userId;
     }
 
+    /**
+     * @param $userId
+     * @return $this
+     */
     public function setUserId($userId)
     {
         $this->userId = $userId;
         return $this;
     }
 
+    /**
+     * @return null
+     */
     public function getUserId()
     {
         return $this->userId;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     protected function editRules(): array
     {
@@ -41,7 +58,7 @@ class SaveUserValidator extends AbstractSaveUserValidator
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function createRules(): array
     {
@@ -55,7 +72,7 @@ class SaveUserValidator extends AbstractSaveUserValidator
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     protected function baseRules(): array
     {
@@ -72,8 +89,11 @@ class SaveUserValidator extends AbstractSaveUserValidator
             'address.zipcode' => ['required','digits:8'],
         ];
     }
-    
-    
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return array_merge_recursive($this->baseRules(),
@@ -83,15 +103,6 @@ class SaveUserValidator extends AbstractSaveUserValidator
         );
     }
 
-    /**
-     * @param array $data
-     * @return array
-     * @throws ValidationException
-     */
-    public function validate($data): array
-    {
-        return \Validator::make($data, $this->rules())->validate();
-    }
 
    
 }

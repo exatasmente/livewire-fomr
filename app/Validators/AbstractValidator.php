@@ -2,45 +2,28 @@
 namespace App\Validators;
 
 
-use Illuminate\Support\Facades\Validator;
+use App\Validators\Contracts\ValidatorInterface;
+use Illuminate\Validation\ValidationException;
 
+/**
+ * Class AbstractValidator
+ * @package App\Validators
+ */
 abstract class AbstractValidator implements ValidatorInterface
 {
-    protected $validator;
-
     /**
-     * @param $data
-     * @return self
+     * {@inheritdoc}
+     * @throws ValidationException
      */
-    public function setData($data) : self
+    public function validate($data): array
     {
-        $this->validator = Validator::make(
-            $data,
-            $this->rules(),
-            $this->messages()
-        );
-        return $this;
-    }
-
-    public function validate() {
-        return $this->validator->validate();
+        return \Validator::make($data, $this->rules())->validate();
     }
 
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function rules(): array
-    {
-        return [];
-    }
+    public abstract function rules();
 
-
-    /**
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [];
-    }
 }
